@@ -1,5 +1,11 @@
 package utils
 
+import (
+	"fmt"
+
+	"github.com/thanhpk/randstr"
+)
+
 func Contains(a []string, x string) bool {
 	for _, n := range a {
 		if x == n {
@@ -16,4 +22,10 @@ func ContainsInt(a []int, x int) bool {
 		}
 	}
 	return false
+}
+
+func getRandomStr() string {
+	MyString := randstr.String(20)
+	fmt.Println(MyString)
+	return MyString
 }

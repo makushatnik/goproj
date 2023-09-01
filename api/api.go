@@ -13,7 +13,7 @@ type ApiResponse struct {
 
 func handler(w http.ResponseWriter, r *http.Request) {
 
-	res := ApiResponse{Result: ["ok"], Code: 200, Err: ""}
+	res := ApiResponse{["ok"], 200, ""}
 	jsonData, _ = json.Marshal(res)
 	_, _ := w.Write(jsonData)
 }
