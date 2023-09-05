@@ -1,0 +1,8 @@
+.env.example
+.gitignore
+.git
+Makefile
+start.sh
+README.md
+go.mod
+go.sum

@@ -2,6 +2,7 @@ package utils
 
 import (
 	"fmt"
+	"log"
 
 	"github.com/thanhpk/randstr"
 )
@@ -28,4 +29,16 @@ func getRandomStr() string {
 	MyString := randstr.String(20)
 	fmt.Println(MyString)
 	return MyString
+}
+
+func LogError(err error) {
+	if err != nil {
+		log.Fatalln(err)
+	}
+}
+
+func PanicError(err error) {
+	if err != nil {
+		panic(err)
+	}
 }

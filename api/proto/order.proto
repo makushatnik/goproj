@@ -1,0 +1,16 @@
+syntax = "proto3";
+
+option go_package = "./orderservice;orderservice";
+
+package order;
+
+service OrderService {
+    rpc GetOrders(Empty) returns (stream Order) {}
+}
+
+message Order {
+    string OrderID = 1;
+    string BasketID = 2;
+}
+
+message Empty {}

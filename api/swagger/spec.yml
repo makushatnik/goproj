@@ -1,1 +1,121 @@
 swagger: "2.0"
+info:
+  version: "1.0.0"
+  title: "Web Application"
+host: "horse"
+
+consumes:
+  - application/json
+produces:
+  - application/json
+
+paths:
+  /user:
+    post:
+      summary: Create User
+      parameters:
+        - in: header
+          name: fingerprint
+          type: string
+          required: true
+        - in: body
+          name: user
+          required: false
+          schema:
+            $ref: "#/definitions/CreateUserRequest"
+      responses:
+        201:
+          description: User was successfully created
+        400:
+          description: Bad request
+          schema:
+            $ref: "#/definitions/FailResponse"
+        500:
+          description: Internal server error
+          schema:
+            $ref: "#/definitions/FailResponse"
+    get:
+      summary: User list
+      parameters:
+        - in: header
+          name: fingerprint
+          type: string
+          required: true
+      responses:
+        200:
+          description: Ok
+          schema:
+            type: array
+            items:
+              $ref: "#/definitions/User"
+        500:
+          description: Internal server error
+          schema:
+            $ref: "#/definitions/FailResponse"
+
+  /user/{email}:
+    get:
+      summary: Get User by email
+      parameters:
+        - in: header
+          name: fingerprint
+          type: string
+          required: true
+        - in: path
+          name: email
+          type: string
+          required: true
+      responses:
+        200:
+          description: Ok
+          schema:
+            $ref: "#/definitions/User"
+        400:
+          description: Bad request
+          schema:
+            $ref: "#/definitions/FailResponse"
+        500:
+          description: Internal server error
+          schema:
+            $ref: "#/definitions/FailResponse"
+
+definitions:
+  FailResponse:
+    description: unsuccessful request
+    type: object
+    required:
+      - error
+    properties:
+      error:
+        description: error message
+        type: string
+
+  CreateUserRequest:
+    description: Create user request params
+    type: object
+    required:
+      - payload
+    properties:
+      payload:
+        $ref: "#/definitions/User"
+
+  User:
+    description: UserDto
+    type: object
+    required:
+      - email
+      - fullName
+      - isAdmin
+    properties:
+      email:
+        description: User email
+        type: string
+        example: example@gmail.com
+      fullName:
+        description: User full name
+        type: string
+        example: John Doe
+      isAdmin:
+        description: If User is admin
+        type: boolean
+        example: false
